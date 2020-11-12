@@ -1,20 +1,20 @@
 #include <iostream>
-#include <vector>
-#include <string>
+#include <list>
 using namespace std;
 
 int main(){
+    cout << " ----------------------------------------------------------------------------" << endl;
+    cout << "| #######                                    #######                         |" << endl;
+    cout << "| #         ##   #    # # #     #     #      #       # #      #    #  ####   |" << endl;
+    cout << "| #        #  #  ##  ## # #      #   #       #       # #      ##  ## #       |" << endl;
+    cout << "| #####   #    # # ## # # #       # #        #####   # #      # ## #  ####   |" << endl;
+    cout << "| #       ###### #    # # #        #         #       # #      #    #      #  |" << endl;
+    cout << "| #       #    # #    # # #        #         #       # #      #    # #    #  |" << endl;
+    cout << "| #       #    # #    # # ######   #         #       # ###### #    #  ####   |" << endl;
+    cout << " ----------------------------------------------------------------------------" << endl << endl;
     int opcion = 0;//Incializando la variable opcion
     bool estado = true;//Inizializando un bool para usarlo como contunuacion o stop del menu
     while(estado){
-        cout << "_|_|_|_|                          _|  _|               _|_|_|_|  _|  _|" << endl;
-        cout << "_|        _|_|_|  _|_|_|  _|_|        _|  _|    _|     _|            _|  _|_|_|  _|_|      _|_|_| " << endl;
-        cout << "_|_|_|  _|    _|  _|    _|    _|  _|  _|  _|    _|     _|_|_|    _|  _|  _|    _|    _|  _|_|  " << endl;
-        cout << "_|      _|    _|  _|    _|    _|  _|  _|  _|    _|     _|        _|  _|  _|    _|    _|      _|_|  " << endl;
-        cout << "_|        _|_|_|  _|    _|    _|  _|  _|    _|_|_|     _|        _|  _|  _|    _|    _|  _|_|_|  " << endl;
-        cout << "                                                _| " << endl;
-        cout << "                                            _|_|   " << endl;
-        
         cout <<"1. Hacer una transaccion" << endl;
         cout <<"2. Ver las categorias mas populares" << endl;
         cout <<"3. Calcular ganancias totales" << endl;
@@ -30,7 +30,7 @@ int main(){
             case 3:
                 break;
             case 4:
-            cout << "Gracias por usar Ete Sech software!" << endl;
+            cout << "Gracias por usar nuestro software!" << endl;
             estado = false;
                 break;
             default:
