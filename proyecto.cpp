@@ -27,6 +27,7 @@ int cant();
 void accionMenu(string nombreCliente), dramaMenu(string nombreCliente), comediaMenu(string nombreCliente);
 bool confirmar();
 void mostrarTicket(list<nodo> *s);
+void TicketsPorCategoria();
 
 int main(){
     cout << " ----------------------------------------------------------------------------" << endl;
@@ -39,7 +40,7 @@ int main(){
     cout << "| #       #    # #    # # ######   #         #       # ###### #    #  ####   |" << endl;
     cout << " ----------------------------------------------------------------------------" << endl << endl;
     int opcionMenuP{0}, opcionTran{0}; string client_name;//Incializando la variable opcion
-    bool estadoMenuP{true}, estadoTran;//Inizializando un bool para usarlo como contunuacion o stop del menu
+    bool estadoMenuP{true}, estadoTran;//Inizializando un bool para usarlo como continuacion o stop del menu
     while(estadoMenuP){
         estadoTran=true;
         cout << "   - | Menu principal | -\n" << endl;
@@ -81,7 +82,11 @@ int main(){
             }
                 break;
             case 2:
+            cout<<endl;
             cout << "     | Categorias mas populares | " << endl;
+            cout<<endl;
+            TicketsPorCategoria();
+            cout<<endl;
                 break;
             case 3:
             cout << "     | Ganancias totales |" << endl;
@@ -262,9 +267,85 @@ bool confirmar(){
 //Con esta funcion mostramos la compra de ticket luego de ser ingresada a la lista
 void mostrarTicket(list<nodo> *s){
     cout << "\n     | Resumen de la compra |" << endl;
-    cout<<"Nombre del cliente: "<<s->back().nombre<<endl;
+    cout<<"Nombre del cliente: "<<s->back().ticket.nombrePelicula <<endl;
     cout<<"Pelicula: "<<s->back().ticket.nombrePelicula<<endl;
     cout<<"Precio c/u: $"<<s->back().ticket.precio<<endl;
     cout<<"Cantidad de tickets: "<<s->back().ticket.cantidad<<endl;
     cout<<"Monto total: $"<<s->back().total<<endl<<endl;
+}
+
+void TicketsPorCategoria(){
+    int acc=0,dram=0,com=0;
+    //Se recorren cada una de las listas y se guarda la cantidad de tickets totales de la lista
+    list<nodo>::const_iterator(i);
+    for(i=accion.begin(); i!=accion.end();i++){
+        acc+=i->ticket.cantidad;
+    }
+    for(i=drama.begin(); i!=drama.end();i++){
+        dram+=i->ticket.cantidad;
+    }
+    for(i=comedia.begin(); i!=comedia.end();i++){
+        com+=i->ticket.cantidad;
+    }
+    //Se comparan las cantidades de tickets para obtener quien es el que ha tenido mayor popularidad(segun las vista)
+    if (acc==0 && dram==0 && com==0){
+        cout<<"Aun no se ha visto ninguna pelicula\n";
+    }else if(acc>dram &&dram==0 && com==0){
+        cout<<"1-Accion: "<<acc<<endl;
+        cout<<"Comedia y Drama aun no han sido vistas\n";
+    }else if(dram>acc && acc==0 && com==0){
+        cout<<"1-Drama: "<<dram<<endl;
+        cout<<"Comedia y Accion aun no han sido vistas\n";
+    }else if(com>dram && dram==0 && acc==0){
+        cout<<"1-Comedia: "<<com<<endl;
+        cout<<"Drama y Accion aun no han sido vistas\n";
+    }else if(acc>dram && dram>com && com==0){
+        cout<<"1-Accion: "<<acc<<endl;
+        cout<<"2-Drama: "<<dram<<endl;
+        cout<<"3-Comedia: "<<com<<endl;
+    }else if(acc>com && com>dram && dram==0){
+        cout<<"1-Accion: "<<acc<<endl;
+        cout<<"2-Comedia: "<<com<<endl;
+        cout<<"3-Drama: "<<dram<<endl;
+    }else if(dram>acc && acc>com && com==0){
+        cout<<"1-Drama: "<<dram<<endl;
+        cout<<"2-Accion: "<<acc<<endl;
+        cout<<"3-Comedia: "<<com<<endl;
+    }else if(dram>com && com>acc && acc==0){
+        cout<<"1-Drama: "<<dram<<endl;
+        cout<<"2-Comedia: "<<com<<endl;
+        cout<<"3-Accion: "<<acc<<endl; 
+    }else if(com>acc && acc>dram && dram==0){
+        cout<<"1-Comedia: "<<com<<endl;
+        cout<<"2-Accion: "<<acc<<endl;
+        cout<<"3-Drama: "<<dram<<endl;
+    }else if(com>dram && dram>acc && acc==0){
+        cout<<"1-Comedia: "<<com<<endl;
+        cout<<"2-Drama: "<<dram<<endl;
+        cout<<"3-Accion: "<<acc<<endl;
+    }else if(acc>dram && dram>com){
+        cout<<"1-Accion: "<<acc<<endl;
+        cout<<"2-Drama: "<<dram<<endl;
+        cout<<"3-Comedia: "<<com<<endl;
+    }else if(acc>com && com>dram){
+        cout<<"1-Accion: "<<acc<<endl;
+        cout<<"2-Comedia: "<<com<<endl;
+        cout<<"3-Drama: "<<dram<<endl;
+    }else if(dram>acc && acc>com){
+        cout<<"1-Drama: "<<dram<<endl;
+        cout<<"2-Accion: "<<acc<<endl;
+        cout<<"3-Comedia: "<<com<<endl;
+    }else if(dram>com && com>acc){
+        cout<<"1-Drama: "<<dram<<endl;
+        cout<<"2-Comedia: "<<com<<endl;
+        cout<<"3-Accion: "<<acc<<endl; 
+    }else if(com>acc && acc>dram){
+        cout<<"1-Comedia: "<<com<<endl;
+        cout<<"2-Accion: "<<acc<<endl;
+        cout<<"3-Drama: "<<dram<<endl;
+    }else if(com>dram && dram>acc){
+        cout<<"1-Comedia: "<<com<<endl;
+        cout<<"2-Drama: "<<dram<<endl;
+        cout<<"3-Accion: "<<acc<<endl;
+    }
 }
