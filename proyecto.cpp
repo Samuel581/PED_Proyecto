@@ -1,5 +1,6 @@
 #include <iostream>
 #include <list>
+#include <string>
 using namespace std;
 
 struct Pelicula{
@@ -23,6 +24,9 @@ list<nodo> drama;
 list<nodo> comedia;
 void push_backL(string nombre, string nombreP, int cantidad, list<nodo> *s);
 int cant();
+void accionMenu(string nombreCliente), dramaMenu(string nombreCliente), comediaMenu(string nombreCliente);
+bool confirmar();
+void mostrarTicket(list<nodo> *s);
 
 int main(){
     cout << " ----------------------------------------------------------------------------" << endl;
@@ -34,7 +38,7 @@ int main(){
     cout << "| #       #    # #    # # #        #         #       # #      #    # #    #  |" << endl;
     cout << "| #       #    # #    # # ######   #         #       # ###### #    #  ####   |" << endl;
     cout << " ----------------------------------------------------------------------------" << endl << endl;
-    int opcionMenuP{0}, opcionTran{0};//Incializando la variable opcion
+    int opcionMenuP{0}, opcionTran{0}; string client_name;//Incializando la variable opcion
     bool estadoMenuP{true}, estadoTran{true};//Inizializando un bool para usarlo como contunuacion o stop del menu
     while(estadoMenuP){
         cout << "   - | Menu principal | -\n" << endl;
@@ -47,20 +51,26 @@ int main(){
         //Menu
         switch(opcionMenuP){
             case 1:
+            cin.ignore();
+            cout<<"Ingrese el nombre y apellido del cliente: ";
+            getline(cin, client_name);
             while(estadoTran){
                 cout << "\n     | Transaccion |\n" << endl;
-                cout << "1. Pelicula de Accion\n2.Pelicula de Drama\n3.Pelicula de Comedia\n4.Terminar transaccion" << endl;
+                cout << "1. Pelicula de Accion\n2. Pelicula de Drama\n3. Pelicula de Comedia\n4. Terminar transaccion" << endl;
                 cout << "Seleccione accion a realizar: ";
                 cin >> opcionTran;
                 switch(opcionTran){
                     case 1:
+                    accionMenu(client_name);
+                    estadoTran=confirmar();
                         break;
                     case 2:
+                    dramaMenu(client_name);
+                    estadoTran=confirmar();
                         break;
                     case 3:
-                        break;
-                    case 4:
-                    estadoTran = false;
+                    comediaMenu(client_name);
+                    estadoTran=confirmar();
                         break;
                     default:
                     cout << "Seleccione una opcion valida " << endl;
@@ -86,6 +96,120 @@ int main(){
     }
 }
 
+void accionMenu(string nombreCliente){
+    int opc, canTicket;
+    bool estado = true;
+    while(estado){
+    cout << "\n     | Peliculas de accion |\n" << endl;
+                cout << "1. The Karate Kid\n2. Avengers: Endgame\n3. Spiderman: Un nuevo universo\n4. Dragon Ball Super: Broly" << endl;
+                cout << "Seleccione accion a realizar: ";
+                cin >> opc;
+                canTicket = cant(); 
+                switch(opc){
+                    case 1:
+                    push_backL(nombreCliente,"The Karate Kid", canTicket, &accion);
+                    estado = false;
+                    mostrarTicket(&accion);
+                        break;
+                    case 2:
+                    push_backL(nombreCliente,"Avengers: Endgame", canTicket, &accion);
+                    estado = false;
+                    mostrarTicket(&accion);
+                        break;
+                    case 3:
+                    push_backL(nombreCliente,"Spiderman: Un nuevo universo", canTicket, &accion);
+                    estado = false;
+                    mostrarTicket(&accion);
+                        break;
+                    case 4:
+                    push_backL(nombreCliente,"Dragon Ball Super: Broly", canTicket, &accion);
+                    estado = false;
+                    mostrarTicket(&accion);
+                        break;
+                    default:
+                    cout << "Seleccione una opcion valida " << endl;
+                        break;
+                }    
+    }
+    
+}
+
+void dramaMenu(string nombreCliente){
+    int opc, canTicket;
+    bool estado = true;
+    while(estado){
+    cout << "\n     | Peliculas de drama |\n" << endl;
+                cout << "1. Bajo la misma estrella\n2. Extraordinario\n3. Una voz silenciosa\n4. Your name" << endl;
+                cout << "Seleccione accion a realizar: ";
+                cin >> opc;
+                canTicket = cant(); 
+                switch(opc){
+                    case 1:
+                    push_backL(nombreCliente,"Bajo la misma estrella", canTicket, &accion);
+                    estado = false;
+                    mostrarTicket(&accion);
+                        break;
+                    case 2:
+                    push_backL(nombreCliente,"Extraorninario", canTicket, &accion);
+                    estado = false;
+                    mostrarTicket(&accion);
+                        break;
+                    case 3:
+                    push_backL(nombreCliente,"Una voz silenciosa", canTicket, &accion);
+                    estado = false;
+                    mostrarTicket(&accion);
+                        break;
+                    case 4:
+                    push_backL(nombreCliente,"Your name", canTicket, &accion);
+                    estado = false;
+                    mostrarTicket(&accion);
+                        break;
+                    default:
+                    cout << "Seleccione una opcion valida " << endl;
+                        break;
+                }    
+    }
+    
+}
+
+void comediaMenu(string nombreCliente){
+    int opc, canTicket;
+    bool estado = true;
+    while(estado){
+    cout << "\n     | Peliculas de comedia |\n" << endl;
+                cout << "1. Shaolin Soccer\n2. Matilda\n3. Mi pequeño angelito\n4. Una pelicula de huevos" << endl;
+                cout << "Seleccione accion a realizar: ";
+                cin >> opc;
+                canTicket = cant(); 
+                switch(opc){
+                    case 1:
+                    push_backL(nombreCliente,"Shaolin Soccer", canTicket, &accion);
+                    estado = false;
+                    mostrarTicket(&accion);
+                        break;
+                    case 2:
+                    push_backL(nombreCliente,"Matilda", canTicket, &accion);
+                    estado = false;
+                    mostrarTicket(&accion);
+                        break;
+                    case 3:
+                    push_backL(nombreCliente,"Mi pequeño angelito", canTicket, &accion);
+                    estado = false;
+                    mostrarTicket(&accion);
+                        break;
+                    case 4:
+                    push_backL(nombreCliente,"Una pelicula de huevos", canTicket, &accion);
+                    estado = false;
+                    mostrarTicket(&accion);
+                        break;
+                    default:
+                    cout << "Seleccione una opcion valida " << endl;
+                        break;
+                }    
+    }
+    
+}
+
 void push_backL(string nombre, string nombreP, int cantidad,  list<nodo> *s){
     nodo auxiliar;
     pelicula aux;
@@ -109,4 +233,32 @@ int cant(){
         }
     }
     return x;
+}
+
+bool confirmar(){
+    int opcion;
+    while(true){
+        cout<<"1. Si\n2. No"<<endl;
+                cout<<"¿Desea realizar una venta mas al cliente actual?: ";
+                cin>>opcion;
+                switch(opcion){
+                    case 1:
+                        return true;
+                        break;
+                    case 2:
+                        cout<<"Venta finalizada"<<endl;
+                        return false;
+                    default:
+                        cout<<"Ingrese una opcion valida."<<endl;
+                }
+    }
+}
+
+void mostrarTicket(list<nodo> *s){
+    cout << "\n     | Resumen de la compra |" << endl;
+    cout<<"Nombre del cliente: "<<s->back().nombre<<endl;
+    cout<<"Pelicula: "<<s->back().ticket.nombrePelicula<<endl;
+    cout<<"Precio c/u: "<<s->back().ticket.precio<<endl;
+    cout<<"Cantidad de tickets: "<<s->back().ticket.cantidad<<endl;
+    cout<<"Monto total: "<<s->back().total<<endl;
 }
