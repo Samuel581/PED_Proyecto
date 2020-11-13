@@ -28,6 +28,8 @@ void accionMenu(string nombreCliente), dramaMenu(string nombreCliente), comediaM
 bool confirmar();
 void mostrarTicket(list<nodo> *s);
 void TicketsPorCategoria();
+void ganancia();
+float gananciastotales=0;
 
 int main(){
     cout << " ----------------------------------------------------------------------------" << endl;
@@ -58,7 +60,7 @@ int main(){
             getline(cin, client_name);
             while(estadoTran){
                 cout << "\n     | Transaccion |\n" << endl;
-                cout << "1. Pelicula de Accion\n2. Pelicula de Drama\n3. Pelicula de Comedia\n4. Terminar transaccion" << endl;
+                cout << "1. Pelicula de Accion\n2. Pelicula de Drama\n3. Pelicula de Comedia\n" << endl;
                 cout << "Seleccione accion a realizar: ";
                 cin >> opcionTran;
                 switch(opcionTran){
@@ -90,6 +92,7 @@ int main(){
                 break;
             case 3:
             cout << "     | Ganancias totales |" << endl;
+                ganancia();
                 break;
             case 4:
             cout << "\nGracias por usar nuestro software!" << endl;
@@ -110,24 +113,27 @@ void accionMenu(string nombreCliente){ //Menu de peliculas de accion
                 cout << "1. The Karate Kid\n2. Avengers: Endgame\n3. Spiderman: Un nuevo universo\n4. Dragon Ball Super: Broly" << endl;
                 cout << "Seleccione accion a realizar: ";
                 cin >> opc;
-                canTicket = cant(); 
                 switch(opc){
                     case 1:
+                    canTicket = cant(); 
                     push_backL(nombreCliente,"The Karate Kid", canTicket, &accion);
                     estado = false;
                     mostrarTicket(&accion);
                         break;
                     case 2:
+                    canTicket = cant(); 
                     push_backL(nombreCliente,"Avengers: Endgame", canTicket, &accion);
                     estado = false;
                     mostrarTicket(&accion);
                         break;
                     case 3:
+                    canTicket = cant();     
                     push_backL(nombreCliente,"Spiderman: Un nuevo universo", canTicket, &accion);
                     estado = false;
                     mostrarTicket(&accion);
                         break;
                     case 4:
+                    canTicket = cant(); 
                     push_backL(nombreCliente,"Dragon Ball Super: Broly", canTicket, &accion);
                     estado = false;
                     mostrarTicket(&accion);
@@ -148,24 +154,27 @@ void dramaMenu(string nombreCliente){ //Menu de peliculas de drama
                 cout << "1. Bajo la misma estrella\n2. Extraordinario\n3. Una voz silenciosa\n4. Your name" << endl;
                 cout << "Seleccione accion a realizar: ";
                 cin >> opc;
-                canTicket = cant(); 
                 switch(opc){
                     case 1:
+                    canTicket = cant(); 
                     push_backL(nombreCliente,"Bajo la misma estrella", canTicket, &drama);
                     estado = false;
                     mostrarTicket(&drama);
                         break;
                     case 2:
+                    canTicket = cant(); 
                     push_backL(nombreCliente,"Extraorninario", canTicket, &drama);
                     estado = false;
                     mostrarTicket(&drama);
                         break;
                     case 3:
+                    canTicket = cant(); 
                     push_backL(nombreCliente,"Una voz silenciosa", canTicket, &drama);
                     estado = false;
                     mostrarTicket(&drama);
                         break;
                     case 4:
+                    canTicket = cant(); 
                     push_backL(nombreCliente,"Your name", canTicket, &drama);
                     estado = false;
                     mostrarTicket(&drama);
@@ -185,25 +194,28 @@ void comediaMenu(string nombreCliente){ //Menu de peliculas de comedia
     cout << "\n     | Peliculas de comedia |\n" << endl;
                 cout << "1. Shaolin Soccer\n2. Matilda\n3. Mi pequeño angelito\n4. Una pelicula de huevos" << endl;
                 cout << "Seleccione accion a realizar: ";
-                cin >> opc;
-                canTicket = cant(); 
+                cin >> opc; 
                 switch(opc){
                     case 1:
+                    canTicket = cant(); 
                     push_backL(nombreCliente,"Shaolin Soccer", canTicket, &comedia);
                     estado = false;
                     mostrarTicket(&comedia);
                         break;
                     case 2:
+                    canTicket = cant(); 
                     push_backL(nombreCliente,"Matilda", canTicket, &comedia);
                     estado = false;
                     mostrarTicket(&comedia);
                         break;
                     case 3:
+                    canTicket = cant(); 
                     push_backL(nombreCliente,"Mi pequeño angelito", canTicket, &comedia);
                     estado = false;
                     mostrarTicket(&comedia);
                         break;
                     case 4:
+                    canTicket = cant(); 
                     push_backL(nombreCliente,"Una pelicula de huevos", canTicket, &comedia);
                     estado = false;
                     mostrarTicket(&comedia);
@@ -272,6 +284,7 @@ void mostrarTicket(list<nodo> *s){
     cout<<"Precio c/u: $"<<s->back().ticket.precio<<endl;
     cout<<"Cantidad de tickets: "<<s->back().ticket.cantidad<<endl;
     cout<<"Monto total: $"<<s->back().total<<endl<<endl;
+    gananciastotales+=s->back().total;
 }
 
 void TicketsPorCategoria(){
@@ -347,5 +360,16 @@ void TicketsPorCategoria(){
         cout<<"1-Comedia: "<<com<<endl;
         cout<<"2-Drama: "<<dram<<endl;
         cout<<"3-Accion: "<<acc<<endl;
+    }
+}
+
+void ganancia(){
+    nodo unNodo;
+    unNodo.total=gananciastotales;
+    if(unNodo.total==0){
+        cout<<"Actualmente no se han registrado transacciones "<<endl;
+    }
+    else{
+        cout<<"La ganancia total registrada es de: "<<unNodo.total<<endl;
     }
 }
