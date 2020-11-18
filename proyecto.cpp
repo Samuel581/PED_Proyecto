@@ -279,7 +279,7 @@ bool confirmar(){
 //Con esta funcion mostramos la compra de ticket luego de ser ingresada a la lista
 void mostrarTicket(list<nodo> *s){
     cout << "\n     | Resumen de la compra |" << endl;
-    cout<<"Nombre del cliente: "<<s->back().ticket.nombrePelicula <<endl;
+    cout<<"Nombre del cliente: "<<s->back().nombre <<endl;
     cout<<"Pelicula: "<<s->back().ticket.nombrePelicula<<endl;
     cout<<"Precio c/u: $"<<s->back().ticket.precio<<endl;
     cout<<"Cantidad de tickets: "<<s->back().ticket.cantidad<<endl;
