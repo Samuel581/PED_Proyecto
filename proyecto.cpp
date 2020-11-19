@@ -345,7 +345,7 @@ void TicketsPorCategoria(){
     if (acc==0 && dram==0 && com==0){
         cout<<"Aún no se ha visto ninguna película\n\n";
     }else if(acc>0 && acc==dram && dram==com){
-        cout<<"Todas las categorías tienen la misma cantidad de tickets comprados. \n\n";
+        cout<<"Todas las categorías tienen la misma cantidad de tickets comprados. \n\n"; //Imprimimos desde el ultimo ya que fue ordenado de menor a mayor
         cout<< arreglo.at(2).id<<" -> tickets comprados: "<<arreglo.at(2).cant_tick;
         cout<<"\n"<<arreglo.at(1).id<<" -> tickets comprados: "<<arreglo.at(1).cant_tick;
         cout<<"\n"<<arreglo.at(0).id<<" -> tickets comprados: "<<arreglo.at(0).cant_tick;
