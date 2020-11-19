@@ -1,7 +1,14 @@
 #include <iostream>
 #include <list>
 #include <string>
+#include <vector>
+#include <algorithm>
 using namespace std;
+
+struct sortGen{
+    int cant_tick = 0;
+    string id;
+};
 
 struct Pelicula{
     string nombrePelicula;
@@ -28,6 +35,7 @@ void accionMenu(string nombreCliente), dramaMenu(string nombreCliente), comediaM
 bool confirmar();
 void mostrarTicket(list<nodo> *s);
 void TicketsPorCategoria();
+vector<sortGen> sortV(int accion, int comedia, int drama);
 void ganancia();
 float gananciastotales=0;
 
@@ -89,10 +97,13 @@ int main(){
             cout<<endl;
             TicketsPorCategoria();
             cout<<endl;
+            cout<<endl;
                 break;
             case 3:
+            cout << endl;
             cout << "     | Ganancias totales |" << endl;
-                ganancia();
+            ganancia();
+            cout << endl;
                 break;
             case 4:
             cout << "\nGracias por usar nuestro software!" << endl;
@@ -110,6 +121,7 @@ void accionMenu(string nombreCliente){ //Menu de peliculas de accion
     bool estado = true;
     while(estado){
     cout << "\n     | Peliculas de accion |\n" << endl;
+                cout << "El precio para todas las peliculas es de: $3.50\n\n";
                 cout << "1. The Karate Kid\n2. Avengers: Endgame\n3. Spiderman: Un nuevo universo\n4. Dragon Ball Super: Broly" << endl;
                 cout << "Seleccione accion a realizar: ";
                 cin >> opc;
@@ -151,6 +163,7 @@ void dramaMenu(string nombreCliente){ //Menu de peliculas de drama
     bool estado = true;
     while(estado){
     cout << "\n     | Peliculas de drama |\n" << endl;
+                cout << "El precio para todas las peliculas es de: $3.50\n\n";
                 cout << "1. Bajo la misma estrella\n2. Extraordinario\n3. Una voz silenciosa\n4. Your name" << endl;
                 cout << "Seleccione accion a realizar: ";
                 cin >> opc;
@@ -192,6 +205,7 @@ void comediaMenu(string nombreCliente){ //Menu de peliculas de comedia
     bool estado = true;
     while(estado){
     cout << "\n     | Peliculas de comedia |\n" << endl;
+                cout << "El precio para todas las peliculas es de: $3.50\n\n";
                 cout << "1. Shaolin Soccer\n2. Matilda\n3. Mi pequeño angelito\n4. Una pelicula de huevos" << endl;
                 cout << "Seleccione accion a realizar: ";
                 cin >> opc; 
@@ -287,6 +301,24 @@ void mostrarTicket(list<nodo> *s){
     gananciastotales+=s->back().total;
 }
 
+vector<sortGen> sortV(int accion, int comedia, int drama){
+    vector<sortGen> ordenar;
+    sortGen auxiliarSort;
+    auxiliarSort.cant_tick = accion;
+    auxiliarSort.id = "Accion";
+    ordenar.push_back(auxiliarSort);
+    auxiliarSort.cant_tick = comedia;
+    auxiliarSort.id = "Comedia";
+    ordenar.push_back(auxiliarSort);
+    auxiliarSort.cant_tick = drama;
+    auxiliarSort.id = "Drama";
+    ordenar.push_back(auxiliarSort);
+    sort( ordenar.begin(), ordenar.end(),[]( const sortGen &left, sortGen &right ){ 
+        return ( left.cant_tick < right.cant_tick);});
+    cout<<endl;
+    return ordenar;
+}
+
 void TicketsPorCategoria(){
     int acc=0,dram=0,com=0;
     //Se recorren cada una de las listas y se guarda la cantidad de tickets totales de la lista
@@ -300,66 +332,20 @@ void TicketsPorCategoria(){
     for(i=comedia.begin(); i!=comedia.end();i++){
         com+=i->ticket.cantidad;
     }
-    //Se comparan las cantidades de tickets para obtener quien es el que ha tenido mayor popularidad(segun las vista)
+
+    vector<sortGen> arreglo = sortV(acc,com,dram);
+
     if (acc==0 && dram==0 && com==0){
-        cout<<"Aun no se ha visto ninguna pelicula\n";
-    }else if(acc>dram &&dram==0 && com==0){
-        cout<<"1-Accion: "<<acc<<endl;
-        cout<<"Comedia y Drama aun no han sido vistas\n";
-    }else if(dram>acc && acc==0 && com==0){
-        cout<<"1-Drama: "<<dram<<endl;
-        cout<<"Comedia y Accion aun no han sido vistas\n";
-    }else if(com>dram && dram==0 && acc==0){
-        cout<<"1-Comedia: "<<com<<endl;
-        cout<<"Drama y Accion aun no han sido vistas\n";
-    }else if(acc>dram && dram>com && com==0){
-        cout<<"1-Accion: "<<acc<<endl;
-        cout<<"2-Drama: "<<dram<<endl;
-        cout<<"3-Comedia: "<<com<<endl;
-    }else if(acc>com && com>dram && dram==0){
-        cout<<"1-Accion: "<<acc<<endl;
-        cout<<"2-Comedia: "<<com<<endl;
-        cout<<"3-Drama: "<<dram<<endl;
-    }else if(dram>acc && acc>com && com==0){
-        cout<<"1-Drama: "<<dram<<endl;
-        cout<<"2-Accion: "<<acc<<endl;
-        cout<<"3-Comedia: "<<com<<endl;
-    }else if(dram>com && com>acc && acc==0){
-        cout<<"1-Drama: "<<dram<<endl;
-        cout<<"2-Comedia: "<<com<<endl;
-        cout<<"3-Accion: "<<acc<<endl; 
-    }else if(com>acc && acc>dram && dram==0){
-        cout<<"1-Comedia: "<<com<<endl;
-        cout<<"2-Accion: "<<acc<<endl;
-        cout<<"3-Drama: "<<dram<<endl;
-    }else if(com>dram && dram>acc && acc==0){
-        cout<<"1-Comedia: "<<com<<endl;
-        cout<<"2-Drama: "<<dram<<endl;
-        cout<<"3-Accion: "<<acc<<endl;
-    }else if(acc>dram && dram>com){
-        cout<<"1-Accion: "<<acc<<endl;
-        cout<<"2-Drama: "<<dram<<endl;
-        cout<<"3-Comedia: "<<com<<endl;
-    }else if(acc>com && com>dram){
-        cout<<"1-Accion: "<<acc<<endl;
-        cout<<"2-Comedia: "<<com<<endl;
-        cout<<"3-Drama: "<<dram<<endl;
-    }else if(dram>acc && acc>com){
-        cout<<"1-Drama: "<<dram<<endl;
-        cout<<"2-Accion: "<<acc<<endl;
-        cout<<"3-Comedia: "<<com<<endl;
-    }else if(dram>com && com>acc){
-        cout<<"1-Drama: "<<dram<<endl;
-        cout<<"2-Comedia: "<<com<<endl;
-        cout<<"3-Accion: "<<acc<<endl; 
-    }else if(com>acc && acc>dram){
-        cout<<"1-Comedia: "<<com<<endl;
-        cout<<"2-Accion: "<<acc<<endl;
-        cout<<"3-Drama: "<<dram<<endl;
-    }else if(com>dram && dram>acc){
-        cout<<"1-Comedia: "<<com<<endl;
-        cout<<"2-Drama: "<<dram<<endl;
-        cout<<"3-Accion: "<<acc<<endl;
+        cout<<"Aun no se ha visto ninguna pelicula\n\n";
+    }else if(acc>0 && acc==dram && dram==com){
+        cout<<"Todas las categorias tienen la misma cantidad de tickets comprados. \n\n";
+        cout<< arreglo.at(2).id<<" tickets comprados: "<<arreglo.at(2).cant_tick;
+        cout<<"\n"<<arreglo.at(1).id<<" tickets comprados: "<<arreglo.at(1).cant_tick;
+        cout<<"\n"<<arreglo.at(0).id<<" tickets comprados: "<<arreglo.at(0).cant_tick;
+    }else{
+        cout<<"1- "<<arreglo.at(2).id<<" tickets comprados: "<<arreglo.at(2).cant_tick;
+        cout<<"\n2- "<<arreglo.at(1).id<<" tickets comprados: "<<arreglo.at(1).cant_tick;
+        cout<<"\n3- "<<arreglo.at(0).id<<" tickets comprados: "<<arreglo.at(0).cant_tick;
     }
 }
 
@@ -367,9 +353,9 @@ void ganancia(){
     nodo unNodo;
     unNodo.total=gananciastotales;
     if(unNodo.total==0){
-        cout<<"Actualmente no se han registrado transacciones "<<endl;
+        cout<<"\nActualmente no se han registrado transacciones "<<endl;
     }
     else{
-        cout<<"La ganancia total registrada es de: "<<unNodo.total<<endl;
+        cout<<"\nLa ganancia total registrada es de: "<<unNodo.total<<endl;
     }
 }
