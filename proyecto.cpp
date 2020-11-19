@@ -3,8 +3,11 @@
 #include <string>
 #include <vector>
 #include <algorithm>
+#include <locale.h>
+
 using namespace std;
 
+//Estructura utilizada para realizar el ranking de generos mas vistos
 struct sortGen{
     int cant_tick = 0;
     string id;
@@ -40,6 +43,7 @@ void ganancia();
 float gananciastotales=0;
 
 int main(){
+    setlocale(LC_ALL, "");  //Funcion utilizada para agregar caracteres especiales: palabras tildadas
     cout << " ----------------------------------------------------------------------------" << endl;
     cout << "| #######                                    #######                         |" << endl;
     cout << "| #         ##   #    # # #     #     #      #       # #      #    #  ####   |" << endl;
@@ -54,7 +58,7 @@ int main(){
     while(estadoMenuP){
         estadoTran=true;
         cout << "   - | Menu principal | -\n" << endl;
-        cout <<"1. Hacer una transaccion" << endl;
+        cout <<"1. Hacer una transacción" << endl;
         cout <<"2. Ver las categorias mas populares" << endl;
         cout <<"3. Calcular ganancias totales" << endl;
         cout <<"4. Salir" << endl;
